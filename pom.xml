@@ -309,6 +309,18 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
+				<!--# Change for SCA scan using synk
+#By HackDossier
+			<plugin>
+				<groupId>io.snyk</groupId>
+				<artifactId>snyk-maven-plugin</artifactId>
+				<version>2.0.02</version>
+				<inherited>false</inherited>
+				<configuration>
+				 <org>hackdossier</org>
+			        </configuration>
+			</plugin>
+		<!-- Synk change done for SCA
 			</plugins>
 		</pluginManagement>
 	</build>

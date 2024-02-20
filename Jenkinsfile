@@ -11,11 +11,28 @@ pipeline {
             }
         stage('RunSCAAnalysisUsingSynk'){
             steps{
-                        withCredentials([strings(credentialsId: 'SNYK_TOKEN' , variable: 'SNYK_TOKEN')]) {
+                 withCredentials([strings(credentialsId: 'SNYK_TOKEN' , variable: 'SNYK_TOKEN')]) {
                                 sh 'mvn snyk:test -fn'
                 
                     }
                 }
+            stage(Build){
+                steps{
+                    withDockerRegistry([credentialsId: "dockerlogin",url;""])
+                        script{
+                        app = docker.build("hd")
+                        }
+                    }
+                }
+            stage(Push) {
+                steps {
+                    script{
+                        docker.withRegistry('AWS ECR URL','ecr-us-east-1:aws-credentials')
+                        app.push("latest")
+                            }
+                        }
+                    }
+                    
              }
         }
     }
